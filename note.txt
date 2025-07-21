@@ -1,0 +1,41 @@
+npm install dayjs -> react date and time library
+npm install date-fns -> react date and time modular library
+
+npm install react-calender -> calender component in react
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css'; // Import the default CSS
+
+date display section
+    -> single tap opens weekly dates
+    -> double tap opens monthly calender
+    -> again single tap closes and goes to normal
+
+weekly-dates 
+    -> showing all the dates and days in that week
+    -> and when clicked on it we will open that day 
+
+monthly-calendar section 
+    -> i will display a basic calender
+    -> then when click on a date it will take to that card
+
+to-do section 
+    -> daily task
+    -> basic task
+        -> add, edit, delete task
+        -> if a task is not complete at some 
+
+user-info section 
+    - form here i can logout
+    - set daily tasks
+    - and sign in or login option will be there if the user is not logged in
+
+data-base 
+    - for auth
+    - and user data will be stored in mongodb
+
+
+npm install lunarphase-js or suncalc
+
+Daily Arcana
+Midnight Channel
+Take Your Time
