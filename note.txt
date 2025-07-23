@@ -45,6 +45,7 @@ https://www.spriters-resource.com/playstation_3/persona5/
 https://www.gameuidatabase.com/gameData.php?id=72&autoload=12888
 https://www.gameuidatabase.com/gameData.php?id=618
 https://www.gameuidatabase.com/gameData.php?id=1884
+https://editor.p5js.org/FutroRing/full/aF20rJ3Yj
 
 
 npm install uuid
@@ -53,3 +54,7 @@ uuidv4()
 
 npm install dayjs -> react date and time library
 import dayjs from "dayjs";
+dayjs().format('YYYY-MM-DD hh:mm:ss A')
+
+
+npm install @p5-wrapper/react
