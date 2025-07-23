@@ -1,4 +1,3 @@
-npm install dayjs -> react date and time library
 npm install date-fns -> react date and time modular library
 
 npm install react-calender -> calender component in react
@@ -39,3 +38,18 @@ npm install lunarphase-js or suncalc
 Daily Arcana
 Midnight Channel
 Take Your Time
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+https://www.spriters-resource.com/playstation_3/persona5/
+https://www.gameuidatabase.com/gameData.php?id=72&autoload=12888
+https://www.gameuidatabase.com/gameData.php?id=618
+https://www.gameuidatabase.com/gameData.php?id=1884
+
+
+npm install uuid
+import { v4 as uuidv4 } from 'uuid';
+uuidv4()
+
+npm install dayjs -> react date and time library
+import dayjs from "dayjs";

@@ -1,0 +1,10 @@
+.strike{
+    text-decoration: line-through;
+    text-decoration-color: red;        /* Makes the line red */
+    text-decoration-style: wavy;       /* Makes the line wavy */
+    text-decoration-thickness: 3px;  /* Makes the line thicker */
+}
+
+.taskDisplay{
+    user-select: none;
+}
