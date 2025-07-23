@@ -1,0 +1,25 @@
+.date-display-container {
+  
+  width: 17%; 
+  max-width: 500px; 
+  margin-left: -0.9em;
+  margin-top: -2.8em; 
+
+  /* This is the magic part that keeps it a perfect square as it resizes */
+  aspect-ratio: 1 / 1; 
+}
+
+body{
+    /* background-color: #c20e00; */
+    background-color: #c20e00;
+}
+
+.tytdiv{
+    display: flex;
+    justify-content: end;
+}
+
+.tyt{
+    display: flex;
+    width: 20%;
+}

@@ -1,10 +1,108 @@
 .strike{
     text-decoration: line-through;
-    text-decoration-color: red;        /* Makes the line red */
-    text-decoration-style: wavy;       /* Makes the line wavy */
-    text-decoration-thickness: 3px;  /* Makes the line thicker */
+    text-decoration-color: grey;        /* Makes the line red */
+    text-decoration-style: solid;       /* Makes the line wavy */
+    text-decoration-thickness: 0.3em;  /* Makes the line thicker */
 }
 
 .taskDisplay{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 1.3em;
+    justify-content: space-between;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+.taskTitle{
     user-select: none;
+    color: white;
+    /* font-weight: bold; */
+    font-size: 1.7em;
+    width: auto;
+    display: flex;
+    align-items: center;
+}
+
+.taskTitle:hover{
+    font-size: 1.7em;
+}
+
+.taskDisplay:hover{
+    background-color: #fc1600;
+    /* background-color: #2648b6; */
+}
+
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.listDisplay{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: black;
+    width: 100%;
+    padding-left: 1em;
+    padding-right: 1em;
+
+    height: 13em;
+    max-height: 10em;
+    overflow-y: auto;
+    overflow-x:hidden;
+}
+
+.inputContainer{
+    background-color: black;
+    width: 100%;
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.taskContainer{
+    width: 45%;
+    background-color: black;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1.5em;
+    padding-left: 2.5em;
+    padding-bottom: 1.5em;
+    padding-right: 2.5em;
+    gap: 1.2em;
+}
+
+.taskInput{
+    width: 50%;
+    font-size: 1.2em;
+    padding: 1%;
+}
+
+.deleteBtn{
+    width: 40%;
+}
+
+.deleteBtn:hover{
+    width: 41%;
+    transition: 2ms;
+}
+
+.btnHolder{
+    display: flex;
+    justify-content: end;
+    gap: 2em;
+}
+
+.saveBtn{
+    width: 15%;
+    margin-right: 2em;
 }

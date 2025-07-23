@@ -22,7 +22,7 @@ const TaskList = () => {
     }
 
     const AddInDaList = () => {
-        if(newTask.trim() === "") {return}
+        if (newTask.trim() === "") { return }
         const obj = createTask(newTask);
         setList([...list, obj]);
         setNewTask("");
@@ -49,29 +49,35 @@ const TaskList = () => {
 
     return (
         <>
-            <div className='inputContainer'>
-                <input type='text' value={newTask}
-                    onChange={handleTitleChange} placeholder='Enter Da Task' className='taskInput'>
-                </input>
-                <button className="addbtn" onClick={AddInDaList}> ADD </button>
-            </div>
+            <div className="mainContainer">
 
-            <div className="taskContainer">
-                <ul>
-                    {list.map((item, index) => {
-                        return (
-                            <li key={item.id}>
-                                <div className={item.isComplete ? 'taskDisplay strike' : 'taskDisplay'} onClick={() => isDone(index)}>
-                                    {item.title} - {item.date}
+                <div className="taskContainer">
+                    <div className='inputContainer'>
+                        <input type='text' value={newTask}
+                            onChange={handleTitleChange} placeholder='Enter Da Task' className='taskInput'>
+                        </input>
+                        <img src='/save.png' className="saveBtn" onClick={AddInDaList}></img>
+                    </div>
+
+                    <ul className='listDisplay'>
+                        {list.map((item, index) => {
+                            return (
+                                <div className='taskDisplay' key={item.id}>
+                                    <div className={item.isComplete ? 'taskTitle strike' : 'taskTitle'} onClick={() => isDone(index)}>
+                                        {item.title}
+                                    </div>
+
+                                    <div className="btnHolder">
+                                        <img src='/clearData.png' className='deleteBtn' onClick={() => DeleteInDaList(index)}></img>
+                                        {/* <button className='editbtn' onClick={() => EditDaList(index)}>edit</button> */}
+                                    </div>
                                 </div>
-
-                                <button className='deletebtn' onClick={() => DeleteInDaList(index)}>delete</button>
-                                <button className='editbtn' onClick={() => EditDaList(index)}>edit</button>
-                            </li>
-                        )
-                    })}
-                </ul>
+                            )
+                        })}
+                    </ul>
+                </div>
             </div>
+
 
         </>
     )

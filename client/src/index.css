@@ -1,14 +1,28 @@
+@font-face {
+  font-family: 'PersonaTimes';
+  /* The path now starts with "/" to look in the public folder */
+  src: url('/Times New Roman Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'PersonaBodoni';
+  src: url('/bondoni.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'PersonaHelvetica';
+  src: url('/helveticanowdisplay-black.ttf') format('truetype');
+}
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'PersonaHelvetica';
   line-height: 1.5;
-  font-weight: 400;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 
 @media (prefers-color-scheme: light) {
   :root {
