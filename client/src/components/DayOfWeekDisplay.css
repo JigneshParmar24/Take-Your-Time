@@ -4,18 +4,16 @@
   position: absolute;
   z-index: 10;
 
-  /* UPDATED: Using percentages for responsive positioning and size. */
-  /* These values are calculated based on the 500px base canvas size. */
-  top: 18%;      
-  left: 11%;     
-  width: 8%;    
+  /* Better starting values for positioning and size */
+  top: 69%;
+  left: 72%;
+  width: 55%;
   
-  transform: translate(-50%, -50%) rotate(-14deg);
+  transform: translate(-50%, -50%) rotate(-7deg);
   user-select: none;
 }
 
 .day-of-week-container img {
-  /* Make the image always fill its container perfectly */
   width: 100%;
-  display: block; /* Good practice for responsive images */
+  display: block; 
 }

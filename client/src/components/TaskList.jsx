@@ -47,6 +47,24 @@ const TaskList = () => {
         setList(newList);
     }
 
+    let full = list.map((item, index) => {
+                            return (
+                                <div className='taskDisplay' key={item.id}>
+                                    <div className={item.isComplete ? 'taskTitle strike' : 'taskTitle'} onClick={() => isDone(index)}>
+                                        {item.title}
+                                    </div>
+
+                                    <div className="btnHolder">
+                                        <img src='/clearData.png' className='deleteBtn' onClick={() => DeleteInDaList(index)}></img>
+                                        {/* <button className='editbtn' onClick={() => EditDaList(index)}>edit</button> */}
+                                    </div>
+                                </div>
+                            )
+                        })
+
+
+    let empty = <div className = 'none'><img src = '/none.png' className = 'noneImg'></img></div>
+
     return (
         <>
             <div className="mainContainer">
@@ -60,20 +78,7 @@ const TaskList = () => {
                     </div>
 
                     <ul className='listDisplay'>
-                        {list.map((item, index) => {
-                            return (
-                                <div className='taskDisplay' key={item.id}>
-                                    <div className={item.isComplete ? 'taskTitle strike' : 'taskTitle'} onClick={() => isDone(index)}>
-                                        {item.title}
-                                    </div>
-
-                                    <div className="btnHolder">
-                                        <img src='/clearData.png' className='deleteBtn' onClick={() => DeleteInDaList(index)}></img>
-                                        {/* <button className='editbtn' onClick={() => EditDaList(index)}>edit</button> */}
-                                    </div>
-                                </div>
-                            )
-                        })}
+                        {(list.length === 0) ? empty : full}
                     </ul>
                 </div>
             </div>

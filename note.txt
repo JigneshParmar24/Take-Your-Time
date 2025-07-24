@@ -62,3 +62,5 @@ npm install @p5-wrapper/react
 #fc1600
 #2648b6
 #c20e00
+#888
+#b2100a

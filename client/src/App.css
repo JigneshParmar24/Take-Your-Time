@@ -1,25 +1,62 @@
 .date-display-container {
+  position: absolute;
+  bottom: 2.5em;   
+  right: 1em; 
   
-  width: 17%; 
-  max-width: 500px; 
-  margin-left: -0.9em;
-  margin-top: -2.8em; 
+  width: 18%;    
+  max-width: 500px;
+  aspect-ratio: 1 / 1;
 
-  /* This is the magic part that keeps it a perfect square as it resizes */
-  aspect-ratio: 1 / 1; 
+  /* This is needed so the day-of-week can be positioned inside it */
+  position: relative; 
 }
 
-body{
-    /* background-color: #c20e00; */
-    background-color: #c20e00;
+body {
+    background-image: url('/p5b.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh; 
 }
 
-.tytdiv{
+.tytdiv {
     display: flex;
     justify-content: end;
+    position: absolute;
+    bottom: 0.2em; 
+    right: 0.3em;  
+    width: 70%;  
 }
 
-.tyt{
+.tyt {
     display: flex;
     width: 20%;
+}
+
+.dateControls{
+    position: absolute;
+    top: 25%;
+    left: 5%;
+    display: flex;
+    justify-content: space-between;
+    width: 7%;
+}
+
+.aleft, .aright{
+    width: 50%;
+    height: 40%;
+}
+
+.aleft:hover{
+    width: 60%;
+}
+.aleft:hover .aright{
+    width: 50%;
+}
+
+.aright:hover{
+    width: 60%;
+}
+.aright:hover .aleft{
+    width: 50%;
 }

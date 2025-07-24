@@ -1,37 +1,44 @@
 .strike{
     text-decoration: line-through;
-    text-decoration-color: grey;        /* Makes the line red */
-    text-decoration-style: solid;       /* Makes the line wavy */
-    text-decoration-thickness: 0.3em;  /* Makes the line thicker */
+    text-decoration-color: #b2100a;        
+    text-decoration-style: solid;       
+    text-decoration-thickness: 0.3em;  
 }
 
 .taskDisplay{
     display: flex;
     align-items: center;
     width: 100%;
-    gap: 1.3em;
+    padding: 0 1em; 
     justify-content: space-between;
-    padding-left: 1em;
-    padding-right: 1em;
+
+    height: 3.5em; 
+    /* This creates the slanted parallelogram shape */
+    clip-path: polygon(7% 10%, 100% 0%, 95% 100%, 0% 100%);
+    
+    /* A default background and smooth transition */
+    background-color: rgba(0, 0, 0, 0.4);
+    transition: background-color 0.2s ease-in-out;
+}
+.taskDisplay:hover{
+    background-color: #fc1600;
+}
+
+.taskTitle:hover{
+    color: black;
+    transition: color 0.2s ease-in-out;
 }
 
 .taskTitle{
     user-select: none;
     color: white;
-    /* font-weight: bold; */
-    font-size: 1.7em;
-    width: auto;
+    font-size: 1.9em;
     display: flex;
     align-items: center;
-}
-
-.taskTitle:hover{
-    font-size: 1.7em;
-}
-
-.taskDisplay:hover{
-    background-color: #fc1600;
-    /* background-color: #2648b6; */
+    width: auto;
+    max-width: 40%;
+    white-space: nowrap;      
+    margin-left: 0.5em;
 }
 
 .mainContainer{
@@ -39,26 +46,37 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 36%;
+
+    position: absolute;
+    top: 12em;
+    left: 37em;
 }
 
 .listDisplay{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: black;
     width: 100%;
     padding-left: 1em;
     padding-right: 1em;
 
-    height: 13em;
-    max-height: 10em;
+    max-height: 13em;
     overflow-y: auto;
     overflow-x:hidden;
 }
+.listDisplay {
+  /* This hides the scrollbar on Firefox */
+  scrollbar-width: none;
+  /* This hides the scrollbar on Internet Explorer and Edge */
+  -ms-overflow-style: none;
+}
+/* This hides the scrollbar on Chrome, Safari, and other WebKit browsers */
+.listDisplay::-webkit-scrollbar {
+  display: none;
+}
 
 .inputContainer{
-    background-color: black;
     width: 100%;
     padding-left: 1.5em;
     padding-right: 1.5em;
@@ -68,8 +86,7 @@
 }
 
 .taskContainer{
-    width: 45%;
-    background-color: black;
+    width: 100%;
     justify-content: center;
     display: flex;
     flex-direction: column;
@@ -81,28 +98,53 @@
     gap: 1.2em;
 }
 
-.taskInput{
-    width: 50%;
-    font-size: 1.2em;
-    padding: 1%;
-}
 
 .deleteBtn{
     width: 40%;
+    filter: invert(0);
+    transition: filter 0.2s ease-in-out, width 0.2s ease-in-out;
 }
 
 .deleteBtn:hover{
     width: 41%;
-    transition: 2ms;
+    filter: invert(1);
 }
 
 .btnHolder{
     display: flex;
     justify-content: end;
     gap: 2em;
+    margin-right: 0.5em;
 }
 
 .saveBtn{
     width: 15%;
     margin-right: 2em;
+    transition: width 0.2s ease-in-out;
+}
+
+.saveBtn:hover{
+    width: 16%;
+}
+
+.taskInput {
+  border: none; 
+  outline: none; 
+  width: 60%; 
+  background-color: rgba(0, 0, 0, 0.4); 
+  color: #fc1600; 
+  border-bottom: 2px solid #888; 
+  font-family: 'PersonaHelvetica', sans-serif;
+  font-size: 1.5em;
+  padding: 10px;
+
+  transition: border-color 0.3s ease; 
+}
+
+.taskInput::placeholder {
+  color: #aaa;
+}
+
+.taskInput:focus {
+  border-bottom-color: #fc1600; 
 }
