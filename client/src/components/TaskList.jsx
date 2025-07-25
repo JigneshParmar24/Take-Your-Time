@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import dayjs from "dayjs";
 import './TaskList.css'
+import { motion } from 'framer-motion';
 
 const TaskList = () => {
 
@@ -48,22 +49,22 @@ const TaskList = () => {
     }
 
     let full = list.map((item, index) => {
-                            return (
-                                <div className='taskDisplay' key={item.id}>
-                                    <div className={item.isComplete ? 'taskTitle strike' : 'taskTitle'} onClick={() => isDone(index)}>
-                                        {item.title}
-                                    </div>
+        return (
+            <div className='taskDisplay' key={item.id}>
+                <div className={item.isComplete ? 'taskTitle strike' : 'taskTitle'} onClick={() => isDone(index)}>
+                    {item.title}
+                </div>
 
-                                    <div className="btnHolder">
-                                        <img src='/clearData.png' className='deleteBtn' onClick={() => DeleteInDaList(index)}></img>
-                                        {/* <button className='editbtn' onClick={() => EditDaList(index)}>edit</button> */}
-                                    </div>
-                                </div>
-                            )
-                        })
+                <div className="btnHolder">
+                    <img src='/clearData.png' className='deleteBtn' onClick={() => DeleteInDaList(index)}></img>
+                    {/* <button className='editbtn' onClick={() => EditDaList(index)}>edit</button> */}
+                </div>
+            </div>
+        )
+    })
 
 
-    let empty = <div className = 'none'><img src = '/none.png' className = 'noneImg'></img></div>
+    let empty = <div className='none'><img src='/none.png' className='noneImg'></img></div>
 
     return (
         <>
@@ -74,7 +75,15 @@ const TaskList = () => {
                         <input type='text' value={newTask}
                             onChange={handleTitleChange} placeholder='Enter Da Task' className='taskInput'>
                         </input>
-                        <img src='/save.png' className="saveBtn" onClick={AddInDaList}></img>
+                        <motion.img
+                            src='/save.png'
+                            className="saveBtn"
+                            onClick={AddInDaList}
+                            alt="Save Task"
+                            whileTap={{ scale: 0.9, rotate: -5 }} // <-- Add this animation prop
+                            // whileTap={{ scale: 0.9 }}
+                            transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                        />
                     </div>
 
                     <ul className='listDisplay'>
@@ -82,7 +91,6 @@ const TaskList = () => {
                     </ul>
                 </div>
             </div>
-
 
         </>
     )

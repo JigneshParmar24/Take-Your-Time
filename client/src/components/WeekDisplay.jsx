@@ -3,9 +3,10 @@ import dayjs from 'dayjs';
 import { v4 as uuidv4 } from 'uuid';
 import './WeekDisplay.css'
 
+import { motion } from 'framer-motion';
+
 const WeekDisplay = ({ currentDate, OnchangeWeek, OnchangeDate }) => {
 
-    const [newCur, setNewCur] = useState(currentDate);
     const [week, setWeek] = useState([]);
     useEffect(() => {
         let tem = [];
@@ -36,25 +37,37 @@ const WeekDisplay = ({ currentDate, OnchangeWeek, OnchangeDate }) => {
         const d2Src = `/nos/${d2}.png`;
         // console.log(item);
 
-        return (<li key={uuidv4()} className='weekCon' 
-        onClick={() => OnchangeDate(item)} 
-        onContextMenu={(event) => {
-            event.preventDefault();
-            OnchangeDate(item); 
-            OnchangeWeek(false);
+        return (<li key={uuidv4()} className='weekCon'
+            onClick={() => OnchangeDate(item)}
+            onContextMenu={(event) => {
+                event.preventDefault();
+                OnchangeDate(item);
+                OnchangeWeek(false);
             }}>
             <div className='nosCon'>
                 <img src={d1Src} className='nosImg' /> <img src={d2Src} className='nosImg' />
             </div>
-            <img src={imageSrc} className='weekImg'/>
+            <img src={imageSrc} className='weekImg' />
         </li>)
     })
 
 
     return (
-        <ul className='weekDis'>
+        <motion.ul
+            className='weekDis'
+            initial={{ x: '-100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '-100%' }}
+
+            // Replace the old transition with this new spring one
+            transition={{
+                type: "spring",
+                stiffness: 300,
+                damping: 25
+            }}
+        >
             {cont}
-        </ul>
+        </motion.ul>
     )
 }
 
