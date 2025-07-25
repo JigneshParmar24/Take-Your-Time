@@ -64,3 +64,26 @@ npm install @p5-wrapper/react
 #c20e00
 #888
 #b2100a
+#cbd2cd
+#bb0000
+
+.weekDis{
+    display: flex;
+    gap: 0.6em;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    justify-content: end;
+    width: 110%;
+    clip-path: polygon(0% 20%, 100% 0%, 100% 110%, 10% 90%);
+    background-color: black;
+    padding-right: 6em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    transform: translate(-7%, 35%) rotate(8deg);
+    border: 2px solid #cbd2cd;
+
+    position: absolute;
+}
+
+npm install framer-motion

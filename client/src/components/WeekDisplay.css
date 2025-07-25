@@ -1,0 +1,64 @@
+.weekDis {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-right: 3em;
+  
+  position: absolute;
+  top: -1em;
+  left: -2em;
+}
+
+/* This creates the black, slanted shape BEHIND your content */
+.weekDis::before {
+  content: ''; /* Required for pseudo-elements */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  
+  background-color: black;
+  clip-path: polygon(0% 0%, 100% 0%, 85% 100%, 0% 100%);
+
+  /* Place it behind the actual list items */
+  z-index: -1; 
+}
+
+li{
+    list-style: none;
+}
+
+.weekCon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 7em;
+
+}
+
+.weekCon:hover .nosImg{
+    height: 95% ;
+}
+
+.weekCon:hover .weekImg{
+    width: 75%;
+}
+
+.weekImg{
+    width: 65%;
+}
+
+.nosCon{
+    height: 3em;
+}
+
+.nosImg{
+    height: 90%;
+    filter: invert(1);
+}

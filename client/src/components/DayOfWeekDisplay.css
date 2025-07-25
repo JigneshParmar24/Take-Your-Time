@@ -1,16 +1,19 @@
-/* src/components/DayOfWeekDisplay.css */
-
 .day-of-week-container {
   position: absolute;
   z-index: 10;
 
-  /* Better starting values for positioning and size */
   top: 69%;
   left: 72%;
   width: 55%;
   
   transform: translate(-50%, -50%) rotate(-7deg);
   user-select: none;
+
+  transition: widht 0.2s ease-in-out;
+}
+
+.day-of-week-container:hover{
+    width: 60%;
 }
 
 .day-of-week-container img {

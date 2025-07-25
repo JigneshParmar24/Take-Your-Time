@@ -1,16 +1,15 @@
 import React from 'react';
 import dayjs from 'dayjs';
-import './DayOfWeekDisplay.css'; // We'll create this CSS file next
+import './DayOfWeekDisplay.css'; 
 
-function DayOfWeekDisplay({ date }) {
+function DayOfWeekDisplay({ date, OnchangeWeek}) {
   // Get the three-letter day abbreviation (e.g., "mon", "tue")
   const dayAbbreviation = dayjs(date).format('ddd').toLowerCase();
   
-  // Construct the image path
   const imageSrc = `/days/${dayAbbreviation}.png`;
 
   return (
-    <div className="day-of-week-container">
+    <div className="day-of-week-container" onClick={() => OnchangeWeek(true)}>
       <img src={imageSrc} alt={dayAbbreviation} />
     </div>
   );
