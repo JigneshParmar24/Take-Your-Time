@@ -13,7 +13,7 @@
 
 /* This creates the black, slanted shape BEHIND your content */
 .weekDis::before {
-  content: ''; /* Required for pseudo-elements */
+  content: ''; 
   position: absolute;
   top: 0;
   left: 0;
@@ -24,7 +24,6 @@
   background-color: black;
   clip-path: polygon(0% 0%, 100% 0%, 85% 100%, 0% 100%);
 
-  /* Place it behind the actual list items */
   z-index: -1; 
 }
 
@@ -42,13 +41,9 @@ li{
 
 }
 
-.weekCon:hover .nosImg{
-    height: 95% ;
-}
+/* .weekCon:hover .nosImg{height: 95% ;} */
 
-.weekCon:hover .weekImg{
-    width: 75%;
-}
+/* .weekCon:hover .weekImg{width: 75%;} */
 
 .weekImg{
     width: 65%;

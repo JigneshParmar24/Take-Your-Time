@@ -13,20 +13,16 @@
     justify-content: space-between;
 
     height: 3.5em; 
+    min-height: 3.5em;
     /* This creates the slanted parallelogram shape */
     clip-path: polygon(7% 10%, 100% 0%, 95% 100%, 0% 100%);
-    
-    /* A default background and smooth transition */
-    background-color: rgba(0, 0, 0, 0.4);
-    transition: background-color 0.2s ease-in-out;
-}
-.taskDisplay:hover{
+    border: 0.1em solid white;
+    /* background-color: rgba(0, 0, 0, 0.4); */
     background-color: #fc1600;
 }
 
 .taskTitle:hover{
     color: black;
-    transition: color 0.2s ease-in-out;
 }
 
 .taskTitle{
@@ -60,8 +56,9 @@
     width: 100%;
     padding-left: 1em;
     padding-right: 1em;
+    gap: 1em;
 
-    max-height: 13em;
+    max-height: 14em;
     overflow-y: auto;
     overflow-x:hidden;
 }
@@ -121,10 +118,6 @@
     width: 15%;
     margin-right: 2em;
     transition: width 0.2s ease-in-out;
-}
-
-.saveBtn:hover{
-    width: 16%;
 }
 
 .taskInput {

@@ -87,3 +87,18 @@ npm install @p5-wrapper/react
 }
 
 npm install framer-motion
+import { motion, AnimatePresence } from 'framer-motion';
+
+.aleft:hover{
+    width: 60%;
+}
+.aleft:hover .aright{
+    width: 50%;
+}
+
+.aright:hover{
+    width: 60%;
+}
+.aright:hover .aleft{
+    width: 50%;
+}

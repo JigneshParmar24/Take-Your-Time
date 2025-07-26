@@ -12,10 +12,6 @@
   transition: widht 0.2s ease-in-out;
 }
 
-.day-of-week-container:hover{
-    width: 60%;
-}
-
 .day-of-week-container img {
   width: 100%;
   display: block; 

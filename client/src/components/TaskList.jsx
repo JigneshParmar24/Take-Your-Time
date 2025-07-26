@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import dayjs from "dayjs";
 import './TaskList.css'
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence, animate } from 'framer-motion';
 
 const TaskList = () => {
 
@@ -38,6 +38,14 @@ const TaskList = () => {
         DeleteInDaList(index);
     }
 
+    const containerVariants = {
+        animate: {
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
+    };
+
     const isDone = (i) => {
         let newList = list.map((item, index) => {
             if (index === i) {
@@ -50,21 +58,47 @@ const TaskList = () => {
 
     let full = list.map((item, index) => {
         return (
-            <div className='taskDisplay' key={item.id}>
-                <div className={item.isComplete ? 'taskTitle strike' : 'taskTitle'} onClick={() => isDone(index)}>
+            <motion.div
+                initial={{ y: 50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ x: 50, opacity: 0 }}
+                transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                className='taskDisplay'
+                key={item.id}>
+                <motion.div
+                    whileTap={{ scale: 0.9, rotate: 1 }}
+                    whileHover={{ scale: 1.1, rotate: -3, cursor: "url('/k32.cur'), pointer" }}
+                    transition={{type: "spring", stiffness: 300,damping: 25}}
+                    className={item.isComplete ? 'taskTitle strike' : 'taskTitle'}
+                    onClick={() => isDone(index)}>
                     {item.title}
-                </div>
+                </motion.div>
 
                 <div className="btnHolder">
-                    <img src='/clearData.png' className='deleteBtn' onClick={() => DeleteInDaList(index)}></img>
+                    <motion.img
+                        whileTap={{ scale: 0.9, rotate: 1 }}
+                        whileHover={{ scale: 1.1, rotate: -6, cursor: "url('/k32.cur'), pointer" }}
+                        transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                        src='/clearData.png'
+                        className='deleteBtn'
+                        onClick={() => DeleteInDaList(index)}></motion.img>
                     {/* <button className='editbtn' onClick={() => EditDaList(index)}>edit</button> */}
                 </div>
-            </div>
+            </motion.div>
         )
     })
 
 
-    let empty = <div className='none'><img src='/none.png' className='noneImg'></img></div>
+    let empty = <div className='none'>
+        <motion.img
+            src='/none.png'
+            className='noneImg'
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+        >
+        </motion.img>
+    </div>
 
     return (
         <>
@@ -80,15 +114,18 @@ const TaskList = () => {
                             className="saveBtn"
                             onClick={AddInDaList}
                             alt="Save Task"
-                            whileTap={{ scale: 0.9, rotate: -5 }} // <-- Add this animation prop
-                            // whileTap={{ scale: 0.9 }}
+                            whileTap={{ scale: 0.9, rotate: 1 }}
+                            whileHover={{ scale: 1.1, rotate: -6, cursor: "url('/k32.cur'), pointer" }}
                             transition={{ type: "spring", stiffness: 400, damping: 10 }}
                         />
                     </div>
 
-                    <ul className='listDisplay'>
-                        {(list.length === 0) ? empty : full}
-                    </ul>
+                    <motion.ul
+                        variants={containerVariants}
+                        initial="initial" animate="animate" exit="exit"
+                        className='listDisplay'>
+                        {(list.length === 0) ? empty : <AnimatePresence>{full}</AnimatePresence>}
+                    </motion.ul>
                 </div>
             </div>
 

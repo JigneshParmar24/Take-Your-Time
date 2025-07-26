@@ -26,7 +26,7 @@ const WeekDisplay = ({ currentDate, OnchangeWeek, OnchangeDate }) => {
     }, [currentDate])
 
 
-    const cont = week.map((item, index) => {
+    const cont = week.map((item) => {
 
         const dayAbbreviation = dayjs(item).format('ddd').toLowerCase();
         const imageSrc = `/days2/${dayAbbreviation}.png`;
@@ -35,19 +35,26 @@ const WeekDisplay = ({ currentDate, OnchangeWeek, OnchangeDate }) => {
         const d1 = parseInt(date / 10), d2 = date % 10;
         const d1Src = `/nos/${d1}.png`;
         const d2Src = `/nos/${d2}.png`;
-        // console.log(item);
 
-        return (<li key={uuidv4()} className='weekCon'
-            onClick={() => OnchangeDate(item)}
-            onContextMenu={(event) => {
+        return (<li
+            key={uuidv4()} className='weekCon'
+            onContextMenu={() => OnchangeDate(item)}
+            onClick={(event) => {
                 event.preventDefault();
                 OnchangeDate(item);
                 OnchangeWeek(false);
             }}>
-            <div className='nosCon'>
+            <motion.div className='nosCon'
+                whileTap={{ scale: 0.9, rotate: 5 }}
+                whileHover={{ scale: 1.2, rotate: -7, cursor: "url('/k32.cur'), pointer" }}
+                transition={{ type: "spring", stiffness: 300, damping: 25 }}>
                 <img src={d1Src} className='nosImg' /> <img src={d2Src} className='nosImg' />
-            </div>
-            <img src={imageSrc} className='weekImg' />
+            </motion.div>
+            <motion.img
+                whileTap={{ scale: 0.9, rotate: -5 }}
+                whileHover={{ scale: 1.2, rotate: 7, cursor: "url('/k32.cur'), pointer" }}
+                transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            src={imageSrc} className='weekImg' />
         </li>)
     })
 
@@ -59,7 +66,6 @@ const WeekDisplay = ({ currentDate, OnchangeWeek, OnchangeDate }) => {
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
 
-            // Replace the old transition with this new spring one
             transition={{
                 type: "spring",
                 stiffness: 300,
