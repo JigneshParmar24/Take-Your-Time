@@ -38,7 +38,7 @@ li{
     align-items: center;
 
     height: 7em;
-
+    position: relative;
 }
 
 /* .weekCon:hover .nosImg{height: 95% ;} */
@@ -51,9 +51,21 @@ li{
 
 .nosCon{
     height: 3em;
+    user-select: none;
 }
 
 .nosImg{
     height: 90%;
     filter: invert(1);
+}
+
+.rightA, .leftA{
+    width: 5%;
+}
+
+.tracker{
+    width: 36%;
+    position: absolute;
+    top: -14%;
+    right: 16%;
 }

@@ -61,7 +61,7 @@ const TaskList = () => {
             <motion.div
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                exit={{ x: 50, opacity: 0 }}
+                exit={{ x: 100, opacity: 0 }}
                 transition={{ type: "spring", stiffness: 300, damping: 25 }}
                 className='taskDisplay'
                 key={item.id}>

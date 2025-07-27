@@ -21,18 +21,23 @@ body {
     cursor: url('/cursor.cur'), auto;
 }
 
+img{
+    user-select: none;
+}
+
 .tytdiv {
     display: flex;
-    justify-content: end;
+    flex-direction: column;
+    align-items: center;
     position: absolute;
-    bottom: 0.2em; 
-    right: 0.3em;  
-    width: 70%;  
+    bottom: 1em;
+    right: 1em;
+    width: 15%;  
 }
 
 .tyt {
     display: flex;
-    width: 20%;
+    width: 100%;
 }
 
 .dateControls{
@@ -48,4 +53,15 @@ body {
     width: 50%;
     height: 40%;
     transition: widht 0.2s ease-in-out;
+}
+
+.pfp{
+    width: 50%;
+}
+
+.blackBox{
+    width: 60%;
+    position: absolute;
+    bottom: 100%;
+    right: 30%;
 }

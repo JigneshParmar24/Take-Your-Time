@@ -26,7 +26,7 @@ const WeekDisplay = ({ currentDate, OnchangeWeek, OnchangeDate }) => {
     }, [currentDate])
 
 
-    const cont = week.map((item) => {
+    const cont = week.map((item, index) => {
 
         const dayAbbreviation = dayjs(item).format('ddd').toLowerCase();
         const imageSrc = `/days2/${dayAbbreviation}.png`;
@@ -35,28 +35,51 @@ const WeekDisplay = ({ currentDate, OnchangeWeek, OnchangeDate }) => {
         const d1 = parseInt(date / 10), d2 = date % 10;
         const d1Src = `/nos/${d1}.png`;
         const d2Src = `/nos/${d2}.png`;
+        const cur =  parseInt(dayjs(currentDate).format('d'));
 
         return (<li
             key={uuidv4()} className='weekCon'
-            onContextMenu={() => OnchangeDate(item)}
+            onContextMenu={(event) => { event.preventDefault(); OnchangeDate(item) }}
             onClick={(event) => {
-                event.preventDefault();
                 OnchangeDate(item);
                 OnchangeWeek(false);
             }}>
+
             <motion.div className='nosCon'
+                initial={{ y: '-5%' }}
+                animate={{ y: 0 }}
+                exit={{ y: '-5%' }}
                 whileTap={{ scale: 0.9, rotate: 5 }}
                 whileHover={{ scale: 1.2, rotate: -7, cursor: "url('/k32.cur'), pointer" }}
-                transition={{ type: "spring", stiffness: 300, damping: 25 }}>
+                transition={{ duration: 0.3, ease: "easeInOut" }}>
                 <img src={d1Src} className='nosImg' /> <img src={d2Src} className='nosImg' />
             </motion.div>
+            {(index === cur) && 
+            <motion.img 
+            src='tracker.png' className='tracker'
+            initial={{ x: '50%' }} animate={{ x: 0 }} exit={{ x: '50%' }}
+            transition={{type: "spring", stiffness: 300,damping: 25}}/>
+            }
             <motion.img
+                initial={{ y: '-10%' }}
+                animate={{ y: 0 }}
+                exit={{ y: '-10%' }}
                 whileTap={{ scale: 0.9, rotate: -5 }}
                 whileHover={{ scale: 1.2, rotate: 7, cursor: "url('/k32.cur'), pointer" }}
-                transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            src={imageSrc} className='weekImg' />
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                src={imageSrc} className='weekImg' />
         </li>)
     })
+
+    const NextWeek = () => {
+        let addW = dayjs(week[6]).add(1, 'day').toDate();
+        OnchangeDate(addW);
+    }
+
+    const PrevWeek = () => {
+        let subW = dayjs(week[0]).subtract(1, 'day').toDate();
+        OnchangeDate(subW);
+    }
 
 
     return (
@@ -65,15 +88,18 @@ const WeekDisplay = ({ currentDate, OnchangeWeek, OnchangeDate }) => {
             initial={{ x: '-100%' }}
             animate={{ x: 0 }}
             exit={{ x: '-100%' }}
-
-            transition={{
-                type: "spring",
-                stiffness: 300,
-                damping: 25
-            }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
         >
+            <motion.img
+                whileTap={{ scale: 0.9, rotate: 5 }} whileHover={{ scale: 1.2, rotate: -5, cursor: "url('/k32.cur'), pointer" }}
+                transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                src='/arrowLeft.png' className='leftA' onClick={PrevWeek}></motion.img>
             {cont}
-        </motion.ul>
+            <motion.img
+                whileTap={{ scale: 0.9, rotate: 5 }} whileHover={{ scale: 1.2, rotate: -5, cursor: "url('/k32.cur'), pointer" }}
+                transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                src='/arrowRight.png' className='rightA' onClick={NextWeek}></motion.img>
+        </motion.ul >
     )
 }
 
