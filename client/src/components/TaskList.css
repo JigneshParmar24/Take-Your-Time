@@ -1,43 +1,56 @@
-.strike{
+.strike {
     text-decoration: line-through;
-    text-decoration-color: #fc1600;        
-    text-decoration-style: solid;       
-    text-decoration-thickness: 0.3em;  
+    text-decoration-color: #fc1600;
+    text-decoration-style: solid;
+    text-decoration-thickness: 0.3em;
 }
 
-.taskDisplay{
+.taskDisplay {
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 0 1em; 
+    padding: 0 1em;
     justify-content: space-between;
-
-    height: 3.5em; 
+    border: 0.1em solid #cbd2cd;
+    height: 3.5em;
     min-height: 3.5em;
-    /* This creates the slanted parallelogram shape */
     clip-path: polygon(7% 10%, 100% 0%, 95% 100%, 0% 100%);
-    border: 0.1em solid white;
     /* background-color: rgba(0, 0, 0, 0.4); */
     background-color: #fc1600;
 }
 
-.taskTitle:hover{
-    color: black;
+.taskDisplay:hover{
+    border: 0.1em solid white;
 }
 
-.taskTitle{
+.taskTitle:hover {
+    color: black;
+    text-shadow:
+        -2px -2px 0 white,
+        2px -2px 0 white,
+        -2px 2px 0 white,
+        2px 2px 0 white;
+}
+
+.taskTitle {
     user-select: none;
-    color: white;
     font-size: 1.9em;
     display: flex;
     align-items: center;
     width: auto;
     max-width: 40%;
-    white-space: nowrap;      
+    white-space: nowrap;
     margin-left: 0.5em;
+
+    color: white;
+    text-shadow:
+        -2px -2px 0 black,
+        2px -2px 0 black,
+        -2px 2px 0 black,
+        2px 2px 0 black;
 }
 
-.mainContainer{
+.mainContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -49,7 +62,7 @@
     left: 37em;
 }
 
-.listDisplay{
+.listDisplay {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -60,20 +73,22 @@
 
     max-height: 14em;
     overflow-y: auto;
-    overflow-x:hidden;
-}
-.listDisplay {
-  /* This hides the scrollbar on Firefox */
-  scrollbar-width: none;
-  /* This hides the scrollbar on Internet Explorer and Edge */
-  -ms-overflow-style: none;
-}
-/* This hides the scrollbar on Chrome, Safari, and other WebKit browsers */
-.listDisplay::-webkit-scrollbar {
-  display: none;
+    overflow-x: hidden;
 }
 
-.inputContainer{
+.listDisplay {
+    /* This hides the scrollbar on Firefox */
+    scrollbar-width: none;
+    /* This hides the scrollbar on Internet Explorer and Edge */
+    -ms-overflow-style: none;
+}
+
+/* This hides the scrollbar on Chrome, Safari, and other WebKit browsers */
+.listDisplay::-webkit-scrollbar {
+    display: none;
+}
+
+.inputContainer {
     width: 100%;
     padding-left: 1.5em;
     padding-right: 1.5em;
@@ -82,7 +97,7 @@
     align-items: center;
 }
 
-.taskContainer{
+.taskContainer {
     width: 100%;
     justify-content: center;
     display: flex;
@@ -96,48 +111,49 @@
 }
 
 
-.deleteBtn{
+.deleteBtn {
     width: 40%;
     filter: invert(0);
     transition: filter 0.2s ease-in-out, width 0.2s ease-in-out;
 }
 
-.deleteBtn:hover{
+.deleteBtn:hover {
     width: 41%;
     filter: invert(1);
 }
 
-.btnHolder{
+.btnHolder {
     display: flex;
     justify-content: end;
     gap: 2em;
     margin-right: 0.5em;
 }
 
-.saveBtn{
+.saveBtn {
     width: 15%;
     margin-right: 2em;
     transition: width 0.2s ease-in-out;
 }
 
 .taskInput {
-  border: none; 
-  outline: none; 
-  width: 60%; 
-  background-color: rgba(0, 0, 0, 0.4); 
-  color: #fc1600; 
-  border-bottom: 2px solid #888; 
-  font-family: 'PersonaHelvetica', sans-serif;
-  font-size: 1.5em;
-  padding: 10px;
+    border: none;
+    outline: none;
+    width: 60%;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #fc1600;
+    border-bottom: 2px solid #888;
+    font-family: 'Luckiest Guy', cursive;
+    /* font-family: 'PersonaHelvetica', sans-serif; */
+    font-size: 1.5em;
+    padding: 10px;
 
-  transition: border-color 0.3s ease; 
+    transition: border-color 0.3s ease;
 }
 
 .taskInput::placeholder {
-  color: #aaa;
+    color: #aaa;
 }
 
 .taskInput:focus {
-  border-bottom-color: #fc1600; 
+    border-bottom-color: #fc1600;
 }

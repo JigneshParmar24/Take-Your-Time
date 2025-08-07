@@ -39,6 +39,9 @@ Daily Arcana
 Midnight Channel
 Take Your Time
 
+@import url('https://fonts.googleapis.com/css?family=Luckiest+Guy');
+<link href="https://fonts.googleapis.com/css?family=Fira+Sans:700" rel="stylesheet">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 https://www.spriters-resource.com/playstation_3/persona5/
@@ -102,3 +105,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 .aright:hover .aleft{
     width: 50%;
 }
+
+-----
+
+BACKEND : 
+
+npm install express cors body-parser dotenv mongoose firebase-admin nodemon

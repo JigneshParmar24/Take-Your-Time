@@ -1,0 +1,105 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 70%;
+    background-color: black;
+    flex-direction: column;
+    z-index: 20;
+    position: absolute;
+
+    top: 15%;
+    left: 25%;
+
+    clip-path: polygon(7% 10%, 100% 0%, 95% 90%, 0% 100%);
+}
+
+.formCon {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    color: black;
+    font-size: 2em;
+    text-shadow:
+        -2px -2px 0 white,
+        2px -2px 0 white,
+        -2px 2px 0 white,
+        2px 2px 0 white;
+}
+
+.textBox {
+    width: 30em;
+    height: 2em;
+    padding: 0.3em;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.submitBt {
+    width: 7em;
+    padding: 1em;
+    font-size: 1em;
+    font-weight: bold;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.otherOp {
+    margin: 1em 0;
+    color: black;
+    font-size: 1.2em;
+    text-shadow:
+        -2px -2px 0 white,
+        2px -2px 0 white,
+        -2px 2px 0 white,
+        2px 2px 0 white;
+}
+
+.otherOps {
+    margin-bottom: 0.5em;
+    color: black;
+    font-size: 1.2em;
+    text-shadow:
+        -2px -2px 0 white,
+        2px -2px 0 white,
+        -2px 2px 0 white,
+        2px 2px 0 white;
+}
+
+a {
+    margin-left: 4px;
+    cursor: url('/k32.cur'), pointer;
+}
+
+a:hover{
+    text-decoration: underline;
+    text-decoration-color: #fc1600;
+    text-decoration-thickness: 0.15em;
+}
+
+input {
+    border: none;
+    outline: none;
+    width: 60%;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: #fc1600;
+    border-bottom: 2px solid #888;
+    /* font-family: 'Luckiest Guy', cursive; */
+    font-family: 'PersonaHelvetica', sans-serif;
+    font-size: 1.5em;
+    padding: 10px;
+
+    transition: border-color 0.3s ease;
+}
+
+input::placeholder {
+    color: #aaa;
+}

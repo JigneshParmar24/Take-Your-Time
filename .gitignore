@@ -23,3 +23,5 @@ yarn-error.log*
 
 # Other
 .DS_Store
+firebase-adminsdk.json
+firebase.js

@@ -1,16 +1,44 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, use } from 'react';
 import dayjs from 'dayjs';
 import './App.css';
 import TaskList from './components/TaskList';
 import DateDisplayCanvas from './components/DateDisplayCanvas';
 import DayOfWeekDisplay from './components/DayOfWeekDisplay';
 import WeekDisplay from './components/WeekDisplay';
-import { motion, AnimatePresence, useAnimationControls } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import SignUp from './components/SignUP.jsx';
+import Login from './components/Login.jsx'
+import TYT from './components/TYT.jsx';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
+import axios from 'axios';
 
 function App() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [isWeek, setWeek] = useState(false);
-  const [hatClick, setHatClick] = useState(false);
+  const [signup, setSignup] = useState(false);
+  const [login, setLogin] = useState(false);
+  const [logout, setLogout] = useState(false);
+
+  const [user, setUser] = useState(null);
+  const [userName, setUserName] = useState("");
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      setUser(currentUser);
+
+      if (currentUser) {
+        const token = await currentUser.getIdToken();
+        const response = await axios.get("http://localhost:8080/auth/user", { headers: { Authorization: `Bearer ${token}` } });
+        setUserName(response.data);
+        setLogin(false);
+        setSignup(false);
+        setLogout(true);
+      }
+      else setLogout(false);
+    })
+
+    return () => unsubscribe();
+  }, [])
 
   const goToNextDay = () => {
     setCurrentDate(dayjs(currentDate).add(1, 'day').toDate());
@@ -18,25 +46,6 @@ function App() {
 
   const goToPreviousDay = () => {
     setCurrentDate(dayjs(currentDate).subtract(1, 'day').toDate());
-  };
-
-  const logoControls = useAnimationControls();
-  const hatControls = useAnimationControls();
-
-  const handleHatClick = async () => {
-    await hatControls.start({ rotateY: 0, transition: { duration: 0.0001 } });
-    hatControls.start({
-      rotateY: 360,
-      transition: { duration: 0.5, ease: "easeInOut" },
-    });
-  };
-
-  const handleLogoClick = async () => {
-    await logoControls.start({ rotateY: 0, transition: { duration: 0.0001 } });
-    await logoControls.start({
-      rotateY: 360,
-      transition: { duration: 0.5, ease: "easeInOut" },
-    });
   };
 
   return (
@@ -78,38 +87,12 @@ function App() {
 
       <TaskList />
 
-      <AnimatePresence><div className="tytdiv">
-        {hatClick &&
-          <motion.img
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -50, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 25,}}
-            src="/blackBox.png"
-            className='blackBox'
-            onClick={() => { setHatClick(!hatClick); }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }} />
-        }
+      <TYT OnchangeLogin={setLogin} logout = {logout} OnchangeLogout = {setLogout}/>
 
-        <motion.img
-          src="/hat.png"
-          className='pfp'
-          animate={hatControls}
-          onClick={() => { setHatClick(!hatClick); handleHatClick(); }}
-          whileHover={{ scale: 1.05, rotate: -3 }}
-          whileTap={{ scale: 0.95 }} />
-
-        <motion.img
-          src='/tyt2.png'
-          className='tyt'
-          alt="Take Your Time Logo"
-          animate={logoControls}
-          onClick={() => { handleLogoClick() }}
-          whileHover={{ scale: 1.05, rotate: 5 }}
-          whileTap={{ scale: 0.95 }}
-        />
-      </div></AnimatePresence>
+      <AnimatePresence>
+        {signup && <SignUp OnchangeSignup={setSignup} OnchangeLogin={setLogin} />}
+        {login && <Login OnchangeSignup={setSignup} OnchangeLogin={setLogin} />}
+      </AnimatePresence>
     </>
   );
 }

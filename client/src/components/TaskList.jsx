@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import dayjs from "dayjs";
 import './TaskList.css'
-import { motion, AnimatePresence, animate } from 'framer-motion';
+import { motion, AnimatePresence, animate, scale } from 'framer-motion';
 
 const TaskList = () => {
 
@@ -65,6 +65,7 @@ const TaskList = () => {
                 transition={{ type: "spring", stiffness: 300, damping: 25 }}
                 className='taskDisplay'
                 key={item.id}>
+
                 <motion.div
                     whileTap={{ scale: 0.9, rotate: 1 }}
                     whileHover={{ scale: 1.1, rotate: -3, cursor: "url('/k32.cur'), pointer" }}

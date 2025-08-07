@@ -1,0 +1,63 @@
+.tytdiv {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+
+  width: 15%;
+
+  cursor: pointer;
+}
+
+.tyt {
+  width: 100%;
+  display: block; 
+}
+
+.pfp {
+  position: absolute;
+  
+  width: 45%;
+  bottom: 4em;
+  right: 4em;
+  
+  z-index: 10; 
+
+  outline: none;
+}
+
+.loginfo-container {
+    position: absolute;
+
+    /* --- RESPONSIVE POSITIONING & SIZING --- */
+    width: 100%;              /* Make it 1.5 times the width of the parent */
+    bottom: 322%;             /* Position it above the parent container */
+    left: -8%;                /* Center it horizontally */
+    transform: translateX(-50%); /* Fine-tune the centering */
+    
+    aspect-ratio: 4 / 1.5;
+
+    background-image: url('/blackBox.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.log {
+    color: black;
+    font-size: 1.3em;
+    text-decoration: none;
+    user-select: none;
+    margin-bottom: 0.8em;
+
+        text-shadow:
+        -2px -2px 0 white,
+        2px -2px 0 white,
+        -2px 2px 0 white,
+        2px 2px 0 white;
+}
