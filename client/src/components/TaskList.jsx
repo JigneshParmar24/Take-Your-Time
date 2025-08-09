@@ -1,25 +1,71 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import dayjs from "dayjs";
 import './TaskList.css'
-import { motion, AnimatePresence, animate, scale } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from "../firebase";
+import axios from "axios";
 
-const TaskList = () => {
+const TaskList = ({ currentDate }) => {
 
     const [newTask, setNewTask] = useState("")
     const [list, setList] = useState([])
+
+    const [user, setUser] = useState(null);
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+            setUser(currentUser);
+            if (currentUser) {
+                const targetDate = dayjs(currentDate).format('YYYY-MM-DD');
+                const token = await currentUser.getIdToken();
+                const response = await axios.get(
+                    `http://localhost:8080/task/list?date=${targetDate}`,
+                    { headers: { Authorization: `Bearer ${token}` } }
+                );
+                setList(response.data.data);
+            }
+        })
+        return () => unsubscribe();
+    }, [currentDate, list])
 
     function handleTitleChange(e) {
         setNewTask(e.target.value);
     }
 
     function createTask(title) {
+        const ID = uuidv4();
+        if (user) createTaskUser(title, ID);
         return {
             title: title,
             isComplete: false,
-            date: dayjs().format('YYYY-MM-DD hh:mm:ss A'),
-            id: uuidv4()
+            date: dayjs(currentDate).format('YYYY-MM-DD'),
+            id: ID
         };
+    }
+
+    async function createTaskUser(title, ID) {
+        const token = await user.getIdToken(); // 🔹 Get token here
+
+        const taskData = {
+            userId: user.uid,
+            taskInfo: [{
+                title: title,
+                isComplete: false,
+                date: dayjs(currentDate).format('YYYY-MM-DD'),
+                id: ID
+            }]
+        };
+
+        axios.post("http://localhost:8080/task/new", taskData, {
+            headers: { Authorization: `Bearer ${token}` } // 🔹 Add token to headers
+        })
+            .then(res => {
+                console.log("Server Response:", res.data);
+            })
+            .catch(err => {
+                console.error("Error:", err);
+            });
     }
 
     const AddInDaList = () => {
@@ -28,6 +74,19 @@ const TaskList = () => {
         setList([...list, obj]);
         setNewTask("");
     }
+
+    // const AddInDaListUser = async () => {
+    //     if (newTask.trim() === "") { return }
+    //     createTask(newTask);
+    //     const targetDate = dayjs(currentDate).format('YYYY-MM-DD');
+    //     const token = await currentUser.getIdToken();
+    //     const response = await axios.get(
+    //         `http://localhost:8080/task/list?date=${targetDate}`,
+    //         { headers: { Authorization: `Bearer ${token}` } }
+    //     );
+    //     setList(response.data.data);
+    //     setNewTask("");
+    // }
 
     const DeleteInDaList = (index) => {
         setList(list.filter((_, i) => i !== index))
@@ -59,8 +118,8 @@ const TaskList = () => {
     let full = list.map((item, index) => {
         return (
             <motion.div
-                initial={{ y: 50, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
+                initial={{ x: -100, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
                 exit={{ x: 100, opacity: 0 }}
                 transition={{ type: "spring", stiffness: 300, damping: 25 }}
                 className='taskDisplay'
@@ -69,7 +128,7 @@ const TaskList = () => {
                 <motion.div
                     whileTap={{ scale: 0.9, rotate: 1 }}
                     whileHover={{ scale: 1.1, rotate: -3, cursor: "url('/k32.cur'), pointer" }}
-                    transition={{type: "spring", stiffness: 300,damping: 25}}
+                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
                     className={item.isComplete ? 'taskTitle strike' : 'taskTitle'}
                     onClick={() => isDone(index)}>
                     {item.title}
@@ -113,6 +172,7 @@ const TaskList = () => {
                         <motion.img
                             src='/save.png'
                             className="saveBtn"
+                            // onClick={user ? AddInDaListUser : AddInDaList}
                             onClick={AddInDaList}
                             alt="Save Task"
                             whileTap={{ scale: 0.9, rotate: 1 }}

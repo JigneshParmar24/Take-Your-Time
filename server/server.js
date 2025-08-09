@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const db = require("./Models/db");
 const authRouter = require("./Routes/auth");
+const taskRouter = require("./Routes/task")
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.use("/auth", authRouter);
+app.use("/task", taskRouter);
 
 app.get("/", (req, res) => {
     res.send("kept you waiting huh!");

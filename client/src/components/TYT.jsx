@@ -41,7 +41,11 @@ const TYT = ({ OnchangeLogin, logout, OnchangeLogout }) => {
                         {logout
                             ? <a
                                 className="log"
-                                onClick={() => auth.signOut()}
+                                onClick={() => {
+                                    auth.signOut().then(() => {
+                                        window.location.reload();
+                                    });
+                                }}
                             >Logout</a>
                             : <a
                                 className="log"

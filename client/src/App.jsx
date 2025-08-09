@@ -85,7 +85,7 @@ function App() {
         </motion.div>)
       }
 
-      <TaskList />
+      <TaskList currentDate={currentDate }/>
 
       <TYT OnchangeLogin={setLogin} logout = {logout} OnchangeLogout = {setLogout}/>
 
