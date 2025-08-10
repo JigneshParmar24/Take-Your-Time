@@ -55,4 +55,39 @@ router.get('/list', verifyToken, async (req, res) => {
     }
 });
 
+
+router.delete('/del', verifyToken, async (req, res) => {
+    try {
+        const { id } = req.body; 
+        const userId = req.user.uid; 
+        console.log("ID from body:", id);
+
+        const result = await taskModel.updateOne(
+            { userId: userId },
+            { $pull: { taskInfo: { id: id } } }
+        );
+
+        res.status(200).json({ message: "Task deleted successfully", result });
+    } catch (error) {
+        res.status(500).json({ error: error.message });  
+    }
+})
+
+router.put('/isDone', verifyToken, async(req, res) => {
+    try {
+        const { id, isDone } = req.body; 
+        const userId = req.user.uid; 
+        console.log("ID from body:", id);
+
+        const result = await taskModel.updateOne(
+            { userId: userId, "taskInfo.id": id },
+            { $set: { "taskInfo.$.isComplete": !isDone } } 
+        );
+
+        res.status(200).json({ message: "Task updated successfully", result });
+    } catch (error) {
+        res.status(500).json({ error: error.message });  
+    }
+})
+
 module.exports = router;

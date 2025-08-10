@@ -88,8 +88,23 @@ const TaskList = ({ currentDate }) => {
     //     setNewTask("");
     // }
 
-    const DeleteInDaList = (index) => {
-        setList(list.filter((_, i) => i !== index))
+    const DeleteInDaListUser = async (id) => {
+        const token = await user.getIdToken();
+        await axios.delete(
+            `http://localhost:8080/task/del`,
+            {
+                headers: { Authorization: `Bearer ${token}` },
+                data: { id }
+            }
+        );
+    }
+
+    const DeleteInDaList = async (index) => {
+        if (user) {
+            let ID = list[index].id;
+            await DeleteInDaListUser(ID);
+        }
+        else setList(list.filter((_, i) => i !== index))
     }
 
     const EditDaList = (index) => {
@@ -105,14 +120,29 @@ const TaskList = ({ currentDate }) => {
         }
     };
 
-    const isDone = (i) => {
-        let newList = list.map((item, index) => {
-            if (index === i) {
-                return { ...item, isComplete: !item.isComplete }
-            }
-            return item
-        })
-        setList(newList);
+    const isDoneUser = async (id, isCom) => {
+        const token = await user.getIdToken();
+        await axios.put(
+            `http://localhost:8080/task/isDone`,
+                { id, isDone: isCom }, 
+                {headers: { Authorization: `Bearer ${token}` }}
+        );
+    }
+
+    const isDone = async (i) => {
+        if (user) {
+            let ID = list[i].id;
+            let isCom = list[i].isComplete;
+            await isDoneUser(ID, isCom);
+        } else {
+            let newList = list.map((item, index) => {
+                if (index === i) {
+                    return { ...item, isComplete: !item.isComplete }
+                }
+                return item
+            })
+            setList(newList);
+        }
     }
 
     let full = list.map((item, index) => {
