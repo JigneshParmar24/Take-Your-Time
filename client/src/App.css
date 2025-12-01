@@ -3,7 +3,7 @@
 .date-display-container {
   position: absolute;
   bottom: 2.5em;   
-  right: 1em; 
+  right: -1em; 
   
   width: 15%;    
   max-width: 500px;
