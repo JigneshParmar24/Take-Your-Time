@@ -58,9 +58,9 @@
     width: clamp(280px, 36%, 600px);
 
     position: absolute;
-    top: 50%;
-    left: 58%;
-    transform: translate(-50%, -50%); /* true center */
+    top: 53%;
+    left: 56%;
+    transform: translate(-50%, -50%); 
 }
 
 .listDisplay {
@@ -72,6 +72,7 @@
     padding-right: 1em;
     gap: 1em;
 
+    min-height: 14em;
     max-height: 14em;
     overflow-y: auto;
     overflow-x: hidden;
