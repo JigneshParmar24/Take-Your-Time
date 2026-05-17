@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
 import "./Form.css"
 import { motion, AnimatePresence } from 'framer-motion';
+import { auth } from "../../firebase";
 
 function Login({ OnchangeSignup, OnchangeLogin }) {
     const [email, setEmail] = useState("");

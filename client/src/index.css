@@ -33,6 +33,22 @@ body,
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+    background-image: url('/p5b.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* keeps it locked as viewport changes */
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+
+    cursor: url('/cursor.cur'), auto;
+
+    font-family: 'Luckiest Guy', cursive;
+}
+
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
@@ -44,4 +60,8 @@ body,
   button {
     background-color: #f9f9f9;
   }
+}
+
+img{
+    user-select: none;
 }

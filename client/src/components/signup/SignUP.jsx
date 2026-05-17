@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase";
 import "./Form.css"
 import { motion, AnimatePresence } from 'framer-motion';
+import { auth } from "../../firebase";
 
 function SignUp({ OnchangeSignup, OnchangeLogin }) {
     const [name, setName] = useState("");

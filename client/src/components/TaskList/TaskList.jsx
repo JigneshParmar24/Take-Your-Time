@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import './TaskList.css'
 import { motion, AnimatePresence } from 'framer-motion';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from "../firebase";
+import { auth } from "../../firebase";
 import axios from "axios";
 
 const TaskList = ({ currentDate }) => {

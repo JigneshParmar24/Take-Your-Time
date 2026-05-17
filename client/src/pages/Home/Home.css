@@ -1,5 +1,32 @@
 @import url('https://fonts.googleapis.com/css?family=Luckiest+Guy');
 
+.tytdiv {
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+
+  width: 15%;
+
+  cursor: pointer;
+}
+
+.tyt {
+  width: 100%;
+  display: block; 
+}
+
+.pfp {
+  position: absolute;
+  
+  width: 45%;
+  bottom: 4em;
+  right: 4em;
+  
+  z-index: 10; 
+
+  outline: none;
+}
+
 .date-display-container {
   position: absolute;
   bottom: 2.5em;   
@@ -11,22 +38,6 @@
 
   /* This is needed so the day-of-week can be positioned inside it */
   position: relative; 
-}
-
-body {
-    /* background-image: url('/p5b.jpg'); */
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    min-height: 100vh; 
-
-    cursor: url('/cursor.cur'), auto;
-
-    font-family: 'Luckiest Guy', cursive;
-}
-
-img{
-    user-select: none;
 }
 
 .dateControls{

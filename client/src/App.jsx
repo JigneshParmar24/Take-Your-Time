@@ -1,17 +1,17 @@
 import { useState, useEffect, useRef, use } from 'react';
 import dayjs from 'dayjs';
 import './App.css';
-import TaskList from './components/TaskList';
-import DateDisplayCanvas from './components/DateDisplayCanvas';
-import DayOfWeekDisplay from './components/DayOfWeekDisplay';
-import WeekDisplay from './components/WeekDisplay';
+import TaskList from './components/TaskList/TaskList.jsx';
+import DateDisplayCanvas from './components/DateDisplayCanvas/DateDisplayCanvas.jsx';
+import DayOfWeekDisplay from './components/DayOfWeekDisplayBt/DayOfWeekDisplay.jsx';
+import WeekDisplay from './components/WeeklyDisplay/WeekDisplay.jsx';
 import { motion, AnimatePresence } from 'framer-motion';
-import SignUp from './components/SignUP.jsx';
-import Login from './components/Login.jsx'
 import TYT from './components/TYT.jsx';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import axios from 'axios';
+import SignUp from './components/signup/SignUP.jsx';
+import Login from './components/signup/Login.jsx';
 
 function App() {
   const [currentDate, setCurrentDate] = useState(new Date());

@@ -13,15 +13,14 @@ const WeekDisplay = ({ currentDate, OnchangeWeek, OnchangeDate }) => {
         let cur = parseInt(dayjs(currentDate).format('d'));
 
         for (let i = cur; i > 0; --i) {
-            let addW = dayjs(currentDate).subtract(i, 'day').toDate();
-            tem.push(addW);
+            let subW = dayjs(currentDate).subtract(i, 'day').toDate();
+            tem.push(subW);
         }
         tem.push(dayjs(currentDate).toDate());
         for (let i = 1; i <= 6 - cur; ++i) {
             let addW = dayjs(currentDate).add(i, 'day').toDate();
             tem.push(addW);
         }
-
         setWeek(tem);
     }, [currentDate])
 
@@ -93,12 +92,14 @@ const WeekDisplay = ({ currentDate, OnchangeWeek, OnchangeDate }) => {
             <motion.img
                 whileTap={{ scale: 0.9, rotate: 5 }} whileHover={{ scale: 1.2, rotate: -5, cursor: "url('/k32.cur'), pointer" }}
                 transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                src='/arrowLeft.png' className='leftA' onClick={PrevWeek}></motion.img>
+                src='/arrowLeft.png' className='leftA' onClick={PrevWeek}>
+            </motion.img>
             {cont}
             <motion.img
                 whileTap={{ scale: 0.9, rotate: 5 }} whileHover={{ scale: 1.2, rotate: -5, cursor: "url('/k32.cur'), pointer" }}
                 transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                src='/arrowRight.png' className='rightA' onClick={NextWeek}></motion.img>
+                src='/arrowRight.png' className='rightA' onClick={NextWeek}>
+            </motion.img>
         </motion.ul >
     )
 }
