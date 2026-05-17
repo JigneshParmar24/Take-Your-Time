@@ -1,5 +1,3 @@
-// src/components/DateDisplayCanvas.jsx
-
 import React from 'react';
 import { ReactP5Wrapper } from '@p5-wrapper/react';
 import dayjs from 'dayjs';

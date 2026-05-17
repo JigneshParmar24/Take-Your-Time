@@ -55,11 +55,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 36%;
+    width: clamp(280px, 36%, 600px);
 
     position: absolute;
-    top: 12em;
-    left: 37em;
+    top: 53%;
+    left: 56%;
+    transform: translate(-50%, -50%); 
 }
 
 .listDisplay {
@@ -71,6 +72,7 @@
     padding-right: 1em;
     gap: 1em;
 
+    min-height: 14em;
     max-height: 14em;
     overflow-y: auto;
     overflow-x: hidden;

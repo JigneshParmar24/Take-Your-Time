@@ -3,114 +3,81 @@ import { v4 as uuidv4 } from 'uuid';
 import dayjs from "dayjs";
 import './TaskList.css'
 import { motion, AnimatePresence } from 'framer-motion';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from "../firebase";
-import axios from "axios";
+
+const STORAGE_KEY = 'taskList_data';
+
+const loadFromStorage = () => {
+    try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+    } catch {
+        return [];
+    }
+};
+
+const saveToStorage = (list) => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+};
 
 const TaskList = ({ currentDate }) => {
 
     const [newTask, setNewTask] = useState("")
     const [list, setList] = useState([])
 
-    const [user, setUser] = useState(null);
+    // On date change, load tasks for that date from localStorage
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-            setUser(currentUser);
-            if (currentUser) {
-                const targetDate = dayjs(currentDate).format('YYYY-MM-DD');
-                const token = await currentUser.getIdToken();
-                const response = await axios.get(
-                    `http://localhost:8080/task/list?date=${targetDate}`,
-                    { headers: { Authorization: `Bearer ${token}` } }
-                );
-                setList(response.data.data);
-            }
-        })
-        return () => unsubscribe();
-    }, [currentDate, list])
+        const targetDate = dayjs(currentDate).format('YYYY-MM-DD');
+        const all = loadFromStorage();
+        const filtered = all.filter(task => task.date === targetDate);
+        setList(filtered);
+    }, [currentDate]);
+
+    // Helper: update localStorage with a full new list for the current date
+    const persistList = (updatedList) => {
+        const targetDate = dayjs(currentDate).format('YYYY-MM-DD');
+        const all = loadFromStorage();
+        // Remove existing tasks for this date, then add updated ones
+        const otherDays = all.filter(task => task.date !== targetDate);
+        saveToStorage([...otherDays, ...updatedList]);
+    };
 
     function handleTitleChange(e) {
         setNewTask(e.target.value);
     }
 
-    function createTask(title) {
-        const ID = uuidv4();
-        if (user) createTaskUser(title, ID);
-        return {
-            title: title,
+    const AddInDaList = () => {
+        if (newTask.trim() === "") return;
+        const newObj = {
+            title: newTask,
             isComplete: false,
             date: dayjs(currentDate).format('YYYY-MM-DD'),
-            id: ID
+            id: uuidv4()
         };
-    }
-
-    async function createTaskUser(title, ID) {
-        const token = await user.getIdToken(); // 🔹 Get token here
-
-        const taskData = {
-            userId: user.uid,
-            taskInfo: [{
-                title: title,
-                isComplete: false,
-                date: dayjs(currentDate).format('YYYY-MM-DD'),
-                id: ID
-            }]
-        };
-
-        axios.post("http://localhost:8080/task/new", taskData, {
-            headers: { Authorization: `Bearer ${token}` } // 🔹 Add token to headers
-        })
-            .then(res => {
-                console.log("Server Response:", res.data);
-            })
-            .catch(err => {
-                console.error("Error:", err);
-            });
-    }
-
-    const AddInDaList = () => {
-        if (newTask.trim() === "") { return }
-        const obj = createTask(newTask);
-        setList([...list, obj]);
+        const updated = [...list, newObj];
+        setList(updated);
+        persistList(updated);
         setNewTask("");
-    }
+    };
 
-    // const AddInDaListUser = async () => {
-    //     if (newTask.trim() === "") { return }
-    //     createTask(newTask);
-    //     const targetDate = dayjs(currentDate).format('YYYY-MM-DD');
-    //     const token = await currentUser.getIdToken();
-    //     const response = await axios.get(
-    //         `http://localhost:8080/task/list?date=${targetDate}`,
-    //         { headers: { Authorization: `Bearer ${token}` } }
-    //     );
-    //     setList(response.data.data);
-    //     setNewTask("");
-    // }
-
-    const DeleteInDaListUser = async (id) => {
-        const token = await user.getIdToken();
-        await axios.delete(
-            `http://localhost:8080/task/del`,
-            {
-                headers: { Authorization: `Bearer ${token}` },
-                data: { id }
-            }
-        );
-    }
-
-    const DeleteInDaList = async (index) => {
-        if (user) {
-            let ID = list[index].id;
-            await DeleteInDaListUser(ID);
-        }
-        else setList(list.filter((_, i) => i !== index))
-    }
+    const DeleteInDaList = (index) => {
+        const updated = list.filter((_, i) => i !== index);
+        setList(updated);
+        persistList(updated);
+    };
 
     const EditDaList = (index) => {
-        setNewTask(list[index].title)
+        setNewTask(list[index].title);
         DeleteInDaList(index);
-    }
+    };
+
+    const isDone = (i) => {
+        const updated = list.map((item, index) => {
+            if (index === i) return { ...item, isComplete: !item.isComplete };
+            return item;
+        });
+        setList(updated);
+        persistList(updated);
+    };
 
     const containerVariants = {
         animate: {
@@ -119,31 +86,6 @@ const TaskList = ({ currentDate }) => {
             }
         }
     };
-
-    const isDoneUser = async (id, isCom) => {
-        const token = await user.getIdToken();
-        await axios.put(
-            `http://localhost:8080/task/isDone`,
-                { id, isDone: isCom }, 
-                {headers: { Authorization: `Bearer ${token}` }}
-        );
-    }
-
-    const isDone = async (i) => {
-        if (user) {
-            let ID = list[i].id;
-            let isCom = list[i].isComplete;
-            await isDoneUser(ID, isCom);
-        } else {
-            let newList = list.map((item, index) => {
-                if (index === i) {
-                    return { ...item, isComplete: !item.isComplete }
-                }
-                return item
-            })
-            setList(newList);
-        }
-    }
 
     let full = list.map((item, index) => {
         return (
@@ -178,7 +120,6 @@ const TaskList = ({ currentDate }) => {
         )
     })
 
-
     let empty = <div className='none'>
         <motion.img
             src='/none.png'
@@ -202,7 +143,6 @@ const TaskList = ({ currentDate }) => {
                         <motion.img
                             src='/save.png'
                             className="saveBtn"
-                            // onClick={user ? AddInDaListUser : AddInDaList}
                             onClick={AddInDaList}
                             alt="Save Task"
                             whileTap={{ scale: 0.9, rotate: 1 }}
@@ -219,7 +159,6 @@ const TaskList = ({ currentDate }) => {
                     </motion.ul>
                 </div>
             </div>
-
         </>
     )
 }
